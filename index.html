@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List App - Krouzz Digital Services</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Firebase SDKs v12.4.0 -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0EIiHJSkgxdAzlFtBNLpb__TEE0KkqpQ",
+      authDomain: "todo-list-vanila.firebaseapp.com",
+      projectId: "todo-list-vanila",
+      storageBucket: "todo-list-vanila.firebasestorage.app",
+      messagingSenderId: "1052270332497",
+      appId: "1:1052270332497:web:ce4976efeddda476dc4670"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/12.4.0/firebase-messaging.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Todo App</h1>
+    <div class="todo-app">
+      <button id="open-task-form-btn" class="btn large-btn" aria-label="Add New Task">
+        Add New Task
+      </button>
+      <form class="task-form hidden" id="task-form">
+        <div class="task-form-header">
+          <button id="close-task-form-btn" class="close-task-form-btn" type="button" aria-label="Close form">
+            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+              <path fill="#001f3f" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)" />
+              <path fill="#001f3f" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)" />
+            </svg>
+          </button>
+        </div>
+        <div class="task-form-body">
+          <label class="task-form-label" for="title-input">Title</label>
+          <input required type="text" class="form-control" id="title-input" placeholder="e.g., Buy groceries" />
+          <label class="task-form-label" for="due-date-input">Due Date & Time (Optional)</label>
+          <input type="datetime-local" class="form-control" id="due-date-input" />
+          <label class="task-form-label" for="priority-input">Priority</label>
+          <select class="form-control" id="priority-input">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+          <label class="task-form-label" for="description-input">Description</label>
+          <textarea class="form-control" id="description-input" rows="4" placeholder="Details..."></textarea>
+        </div>
+        <div class="task-form-footer">
+          <button id="add-or-update-task-btn" class="btn large-btn" type="submit">
+            Add Task
+          </button>
+        </div>
+      </form>
+      <dialog id="confirm-close-dialog">
+        <form method="dialog">
+          <p class="discard-message-text">Discard unsaved changes?</p>
+          <div class="confirm-close-dialog-btn-container">
+            <button id="cancel-btn" class="btn">Cancel</button>
+            <button id="discard-btn" class="btn">Discard</button>
+          </div>
+        </form>
+      </dialog>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div id="tasks-container" role="list"></div>
+    </div>
+  </main>
+  <footer>
+    <a href="https://krouzzlife.github.io/KDS/">KDS 2025 (KrouzzDigitalServices)</a>
+  </footer>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+:root {
+    --white: #fff;
+    --light-blue: #c9d2fc;
+    --navy: #001f3f;
+    --light-navy: #003366;
+    --success-green: #28a745;
+    --warning-yellow: #ffc107;
+    --danger-red: #dc3545;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: var(--light-blue);
+    color: var(--navy);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    padding: 1rem;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    color: var(--navy);
+    margin: 1rem 0 2rem 0;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  
+  .todo-app {
+    background-color: var(--white);
+    width: 100%;
+    max-width: 400px;
+    border: 3px solid var(--navy);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 31, 63, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .todo-app:hover {
+    box-shadow: 0 6px 12px rgba(0, 31, 63, 0.15);
+  }
+  
+  .btn {
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    color: var(--light-blue);
+    background: linear-gradient(135deg, var(--navy), var(--light-navy));
+    border: 2px solid var(--navy);
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: auto;
+    min-width: 100px;
+  }
+  
+  .btn:hover {
+    background: linear-gradient(135deg, var(--light-navy), var(--navy));
+    transform: translateY(-2px);
+  }
+  
+  .large-btn {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+  
+  .close-task-form-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  
+  .close-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--navy);
+  }
+  
+  .task-form {
+    position: relative;
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .task-form-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .task-form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .task-form-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .task-form-label {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--navy);
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--light-navy);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .form-control:focus {
+    border-color: var(--navy);
+    outline: none;
+  }
+  
+  #confirm-close-dialog {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--navy);
+    max-width: 300px;
+  }
+  
+  .confirm-close-dialog-btn-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .discard-message-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--light-navy);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success-green), var(--warning-yellow));
+    transition: width 0.5s ease;
+    border-radius: 4px;
+  }
+  
+  #tasks-container {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 400px;
+    gap: 0.5rem;
+  }
+  
+  .task {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--light-blue);
+    border-left: 4px solid var(--navy);
+    border-radius: 4px;
+    animation: slideIn 0.3s ease;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .task.completed {
+    opacity: 0.7;
+    text-decoration: line-through;
+  }
+  
+  .task:hover {
+    transform: translateX(5px);
+  }
+  
+  .task-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .task-checkbox {
+    transform: scale(1.2);
+  }
+  
+  .priority-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .priority-low { background: var(--success-green); color: white; }
+  .priority-medium { background: var(--warning-yellow); color: var(--navy); }
+  .priority-high { background: var(--danger-red); color: white; }
+  
+  .task-desc {
+    font-style: italic;
+    color: var(--light-navy);
+  }
+  
+  .task-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--navy);
+  }
+  
+  footer a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  footer a:hover {
+    color: var(--light-navy);
+  }
+  
+  /* Mobile (<768px): Compact stacked */
+  @media (max-width: 767px) {
+    body { padding: 0.5rem; }
+    h1 { font-size: 2rem; }
+    .todo-app { padding: 1rem; max-width: 100%; }
+    .task-form-body { gap: 0.5rem; }
+    .form-control { font-size: 0.9rem; }
+    .task-actions { flex-direction: column; }
+  }
+  
+  /* Tablet (768-1024px): Wider spacing */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .todo-app { max-width: 500px; padding: 2rem; }
+    h1 { font-size: 2.5rem; }
+    .task { flex-direction: row; align-items: flex-start; gap: 1rem; }
+    .task-header { flex: 1; }
+  }
+  
+  /* Desktop (>1024px): Enhanced visuals */
+  @media (min-width: 1025px) {
+    body { padding: 2rem; }
+    h1 { font-size: 3rem; }
+    .todo-app { max-width: 600px; box-shadow: 0 8px 16px rgba(0, 31, 63, 0.2); }
+    .btn:hover { box-shadow: 0 4px 8px rgba(0, 31, 63, 0.2); }
+  }
