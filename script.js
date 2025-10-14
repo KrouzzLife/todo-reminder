@@ -224,3 +224,21 @@ document.addEventListener('DOMContentLoaded', () => {
     addOrUpdateTask();
   });
 });
+
+// Show guide on permission request or first load
+const guide = document.getElementById("notification-guide");
+const isPermissionGranted = Notification.permission === 'granted';
+if (!isPermissionGranted) {
+  Notification.requestPermission().then(permission => {
+    if (permission === 'granted') {
+      guide.classList.remove("hidden");
+    }
+  });
+} else if (!localStorage.getItem('guideSeen')) {
+  guide.classList.remove("hidden");
+  localStorage.setItem('guideSeen', 'true');  // Don't show again
+}
+
+window.closeGuide = () => {
+  guide.classList.add("hidden");
+};
