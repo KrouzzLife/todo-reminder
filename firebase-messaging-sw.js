@@ -16,19 +16,20 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
   console.log('Background message:', payload);
-  console.log('Payload details:', payload.notification);  // Log title/body for debug
-  if (payload.notification.title && payload.notification.body) {
-    const notificationTitle = payload.notification.title;
+  console.log('Payload details:', payload.notification);
+
+  const { title, body } = payload.notification || {};
+
+  if (title && body) {
     const notificationOptions = {
-      body: payload.notification.body,
-      icon: '/icon-192x192.png',  // Optional icon (404 is fine if missing)
-      badge: '/icon-192x192.png',  // Badge for mobile
-      vibrate: [200, 100, 200],  // Vibration pattern (buzz-buzz-buzz)
-      sound: 'default',  // Default system sound
-      tag: 'todo-reminder'  // Groups notifications
+      body,
+      icon: '/icon-192x192.png',
+      badge: '/icon-192x192.png',
+      tag: 'todo-reminder'
     };
-    self.registration.showNotification(notificationTitle, notificationOptions);
-    console.log('showNotification called successfully!');  // Confirm execution
+
+    self.registration.showNotification(title, notificationOptions);
+    console.log('showNotification called successfully!');
   } else {
     console.error('Missing title/body in payload');
   }
