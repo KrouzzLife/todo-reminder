@@ -184,7 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
-        return getToken(messaging, { vapidKey: 'BLviM87bx44w96JmnuNzvDOrrpuK058wmtW7nCNn3SOfb4zLdSKzg5qX9ho-LJEcuFFpDIN5lTO9bh4O4Ex-q70' }); // Replace with real VAPID!
+        return getToken(messaging, { 
+          vapidKey: 'BLviM87bx44w96JmnuNzvDOrrpuK058wmtW7nCNn3SOfb4zLdSKzg5qX9ho-LJEcuFFpDIN5lTO9bh4O4Ex-q70',
+          scope: '/todo-reminder/firebase-cloud-messaging-push-scope'  // Custom scope for GitHub repo path
+        });
       }
     } catch (error) {
       console.error('FCM Error:', error);
