@@ -7,8 +7,6 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Todo Reminder">
-  <link rel="apple-touch-icon" href="**icon-192x192.png**">  <!-- Removed leading / -->
-  <link rel="manifest" href="**manifest.json**">  <!-- Removed leading / -->
   <link rel="stylesheet" href="style.css">
   <title>Todo List App - Krouzz Digital Services</title>
   <!-- Firebase SDKs v12.4.0 -->
@@ -94,8 +92,9 @@
       <h3>Enable Notifications for Reminders!</h3>
       <p>Allow notifications to get due-date alerts—even when the app is closed.</p>
       <ul>
+        <li><strong>Mac Safari/Chrome:</strong> Grant permission—works in tabs or installed PWAs.</li>
         <li><strong>Android Chrome:</strong> Works out of the box—grant permission when prompted.</li>
-        <li><strong>iPhone Safari (iOS 16.4+):</strong> Add to Home Screen first (Share > Add to Home Screen), then grant permission. Limited to installed PWAs; no bg notifs in regular tabs.</li>
+        <li><strong>iPhone Safari (iOS 16.4+):</strong> Add to Home Screen first (Share > Add to Home Screen), then grant permission. Limited to installed PWAs; no bg notifs in regular tabs. (iPhone 7 max iOS 15—upgrade for support.)</li>
       </ul>
       <button onclick="requestAndEnable()">Enable Notifications</button>
     </div>

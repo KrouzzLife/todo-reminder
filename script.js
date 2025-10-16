@@ -261,9 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   onMessage(messaging, (payload) => {
-  console.log('Foreground message:', payload);
-  new Notification('Todo Reminder!', { body: payload.notification.body, icon: '**icon-192x192.png**' });  // Removed leading /
-});
+    console.log('Foreground message:', payload);
+    new Notification('Todo Reminder!', { body: payload.notification.body, icon: 'icon-192x192.png' });
+  });
 
   // Event listeners
   if (taskData.length) updateTaskContainer();
@@ -315,6 +315,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     closeGuide(); // Close regardless
   };
+
+  // NEW: iOS touch fallback for guide button (fixes iPhone 7 click issues)
+  const enableBtn = document.querySelector('#notification-guide button');
+  if (enableBtn) {
+    enableBtn.addEventListener('click', requestAndEnable);
+    enableBtn.addEventListener('touchstart', (e) => { e.preventDefault(); requestAndEnable(); }, { passive: false });
+    console.log('Button listeners attached for touch/click');
+  }
 
   // Show guide on load if not seen (reliable on reload)
   const guide = document.getElementById("notification-guide");
