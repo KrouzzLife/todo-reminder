@@ -260,22 +260,32 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Form submitted!'); // Debug log
     addOrUpdateTask();
   });
-});
 
-// Show guide on permission request or first load
-const guide = document.getElementById("notification-guide");
-const isPermissionGranted = Notification.permission === 'granted';
-if (!isPermissionGranted) {
-  Notification.requestPermission().then(permission => {
-    if (permission === 'granted') {
-      guide.classList.remove("hidden");
+  // Robust global closeGuide function (inside DOMContentLoaded for safe access)
+  window.closeGuide = () => {
+    const guide = document.getElementById("notification-guide");
+    if (guide) {
+      guide.style.animation = 'fadeOut 0.3s ease';
+      setTimeout(() => {
+        guide.classList.add("hidden");
+        localStorage.setItem('guideSeen', 'true');
+      }, 300);  // Delay for animation
     }
-  });
-} else if (!localStorage.getItem('guideSeen')) {
-  guide.classList.remove("hidden");
-  localStorage.setItem('guideSeen', 'true');  // Don't show again
-}
+  };
 
-window.closeGuide = () => {
-  guide.classList.add("hidden");
-};
+  // Show guide on permission request or first load (inside DOMContentLoaded for safe DOM)
+  const guide = document.getElementById("notification-guide");
+  if (guide) {
+    const isPermissionGranted = Notification.permission === 'granted';
+    if (!isPermissionGranted) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          guide.classList.remove("hidden");
+        }
+      });
+    } else if (!localStorage.getItem('guideSeen')) {
+      guide.classList.remove("hidden");
+      localStorage.setItem('guideSeen', 'true');  // Don't show again
+    }
+  }
+});

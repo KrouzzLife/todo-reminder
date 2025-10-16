@@ -247,10 +247,6 @@
     margin-top: 0.5rem;
   }
   
-  .hidden {
-    display: none;
-  }
-  
   footer {
     text-align: center;
     margin-top: 3rem;
@@ -269,7 +265,8 @@
     color: var(--light-navy);
   }
 
-  .notification-guide {
+  /* Notification Guide Styles (overrides inline for consistency) */
+  #notification-guide {
     position: fixed;
     top: 0;
     left: 0;
@@ -283,7 +280,7 @@
     animation: fadeIn 0.3s ease;
   }
   
-  .guide-content {
+  #notification-guide .guide-content {
     background: var(--white);
     padding: 1.5rem;
     border-radius: 8px;
@@ -294,17 +291,17 @@
     overflow-y: auto;
   }
   
-  .guide-content h3 {
+  #notification-guide .guide-content h3 {
     color: var(--navy);
     margin-bottom: 0.5rem;
   }
   
-  .guide-content p {
+  #notification-guide .guide-content p {
     margin-bottom: 1rem;
     color: var(--light-navy);
   }
   
-  .guide-content ul {
+  #notification-guide .guide-content ul {
     text-align: left;
     margin-bottom: 1rem;
     font-size: 0.9rem;
@@ -312,13 +309,13 @@
     padding-left: 0;
   }
   
-  .guide-content li {
+  #notification-guide .guide-content li {
     margin-bottom: 0.5rem;
     padding-left: 1rem;
     position: relative;
   }
   
-  .guide-content li::before {
+  #notification-guide .guide-content li::before {
     content: "→";
     position: absolute;
     left: 0;
@@ -326,7 +323,7 @@
     font-weight: bold;
   }
   
-  .guide-content button {
+  #notification-guide .guide-content button {
     background: var(--navy);
     color: var(--light-blue);
     border: none;
@@ -335,33 +332,24 @@
     cursor: pointer;
     font-weight: bold;
     transition: background 0.3s;
+    width: 100%;
+    margin-top: 10px;
   }
   
-  .guide-content button:hover {
+  #notification-guide .guide-content button:hover {
     background: var(--light-navy);
   }
-  
+
   .hidden {
-    display: none;
+    display: none !important;
   }
   
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
   }
-  
-  @media (max-width: 767px) {
-    .guide-content {
-      margin: 1rem;
-      padding: 1rem;
-    }
-    
-    .guide-content li {
-      font-size: 0.8rem;
-    }
-  }
-  
-  /* Mobile (<768px): Compact stacked */
+
+  /* Mobile Responsive */
   @media (max-width: 767px) {
     body { padding: 0.5rem; }
     h1 { font-size: 2rem; }
@@ -369,6 +357,13 @@
     .task-form-body { gap: 0.5rem; }
     .form-control { font-size: 0.9rem; }
     .task-actions { flex-direction: column; }
+    #notification-guide .guide-content {
+      margin: 1rem;
+      padding: 1rem;
+    }
+    #notification-guide .guide-content li {
+      font-size: 0.8rem;
+    }
   }
   
   /* Tablet (768-1024px): Wider spacing */
