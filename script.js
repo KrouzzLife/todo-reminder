@@ -103,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         scope: BASE_PATH 
       });
 
+      // Wait for SW to be active before token fetch (fixes subscription abort)
+      await navigator.serviceWorker.ready;
+
       // Fetch token with manual reg + VAPID/scope
       const token = await getToken(messaging, { 
         vapidKey: 'BLviM87bx44w96JmnuNzvDOrrpuK058wmtW7nCNn3SOfb4zLdSKzg5qX9ho-LJEcuFFpDIN5lTO9bh4O4Ex-q70',
