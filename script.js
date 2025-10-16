@@ -316,11 +316,16 @@ document.addEventListener('DOMContentLoaded', () => {
     closeGuide(); // Close regardless
   };
 
-  // NEW: iOS touch fallback for guide button (fixes iPhone 7 click issues)
-  const enableBtn = document.querySelector('#notification-guide button');
+  // Updated: iOS touch fallback for guide button (fixes iPhone 7 click issues)
+  const enableBtn = document.getElementById('enable-notif-btn');
   if (enableBtn) {
-    enableBtn.addEventListener('click', requestAndEnable);
-    enableBtn.addEventListener('touchstart', (e) => { e.preventDefault(); requestAndEnable(); }, { passive: false });
+    const handleEnable = (e) => {
+      e.preventDefault();  // Stop iOS bounce/scroll
+      console.log('Button tapped! Requesting permission...');  // Debug for iPhone console
+      requestAndEnable();
+    };
+    enableBtn.addEventListener('click', handleEnable);
+    enableBtn.addEventListener('touchstart', handleEnable, { passive: false });
     console.log('Button listeners attached for touch/click');
   }
 
@@ -332,4 +337,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Temp: Force show for testing (uncomment if needed)
     // guide.classList.remove("hidden");
   }
+
+  // ESC key handler for closing modals/guides (responsive on keyboard)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      // Close notification guide
+      if (!guide.classList.contains('hidden')) {
+        closeGuide();
+        return;
+      }
+      // Close task form (if open, no unsaved check to keep simple)
+      if (!taskForm.classList.contains('hidden')) {
+        reset();
+        return;
+      }
+      // Close confirm dialog
+      if (confirmCloseDialog.open) {
+        confirmCloseDialog.close();
+        return;
+      }
+      console.log('ESC pressed - no modal to close'); // Debug
+    }
+  });
 });

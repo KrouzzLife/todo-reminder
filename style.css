@@ -336,6 +336,11 @@
     margin-top: 10px;
     z-index: 1001; /* Ensures button is tappable over backdrop */
     opacity: 1; /* Full opacity for touch feedback */
+    -webkit-appearance: none;  /* Removes iOS button styling glitches */
+    appearance: none;  /* Standard property for compatibility */
+    -webkit-tap-highlight-color: transparent;  /* No blue highlight on tap */
+    pointer-events: auto;  /* Ensures taps register */
+    touch-action: manipulation;  /* Faster iOS response */
   }
   
   #notification-guide .guide-content button:hover,
