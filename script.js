@@ -261,9 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   onMessage(messaging, (payload) => {
-    console.log('Foreground message:', payload);
-    new Notification('Todo Reminder!', { body: payload.notification.body, icon: '/icon-192x192.png' });
-  });
+  console.log('Foreground message:', payload);
+  new Notification('Todo Reminder!', { body: payload.notification.body, icon: '**icon-192x192.png**' });  // Removed leading /
+});
 
   // Event listeners
   if (taskData.length) updateTaskContainer();
