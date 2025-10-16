@@ -86,8 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (permission === 'granted') {
           console.log('Notifications enabled!');
           // Optionally init FCM token here if needed
-        } else {
-          console.log('Permission denied.');
+        } else if (permission === 'denied') {
+          console.log('Permission denied—check Safari settings.');
+          alert('Permission denied. Go to Settings > Safari > Notifications to allow.');  // iOS-friendly guide
         }
         return permission;
       } catch (err) {
