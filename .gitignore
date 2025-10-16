@@ -11,7 +11,6 @@ firebase-debug.*.log*
 .firebase/
 
 # Firebase config
-
 # Uncomment this if you'd like others to create their own Firebase project.
 # For a team working on the same Firebase project(s), it is recommended to leave
 # it commented so all members can deploy to the same project(s) in .firebaserc.
@@ -32,16 +31,16 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+# Grunt intermediate storage<a href="http://gruntjs.com/creating-plugins#storing-task-files" target="_blank" rel="noopener noreferrer nofollow"></a>
 .grunt
 
-# Bower dependency directory (https://bower.io/)
+# Bower dependency directory<a href="https://bower.io/" target="_blank" rel="noopener noreferrer nofollow"></a>
 bower_components
 
 # node-waf configuration
 .lock-wscript
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
+# Compiled binary addons<a href="http://nodejs.org/api/addons.html" target="_blank" rel="noopener noreferrer nofollow"></a>
 build/Release
 
 # Dependency directories
@@ -71,3 +70,16 @@ node_modules/
 # Firebase Functions
 functions/node_modules/
 functions/dist/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
