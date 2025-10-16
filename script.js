@@ -80,19 +80,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const scheduleReminder = async (task) => {
     if (!messaging) return;
-    const token = await getFCMToken();
-    if (token) {
+    try {
+      // Request permission if not granted
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        console.warn('Notification permission denied—skipping reminder');
+        return;
+      }
+
+      // Dynamic BASE_PATH: Detects subpath, skips 'index.html' for local
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      let baseSegment = pathSegments[0];
+      if (baseSegment === 'index.html') {
+        baseSegment = '';
+      }
+      const BASE_PATH = baseSegment ? `/${baseSegment}/` : '/';
+
+      console.log('Detected BASE_PATH:', BASE_PATH);  // Debug
+
+      // Manual SW registration for path (fixes 404 on subpath/root)
+      const swRegistration = await navigator.serviceWorker.register(`${BASE_PATH}firebase-messaging-sw.js`, { 
+        scope: BASE_PATH 
+      });
+
+      // Fetch token with manual reg + VAPID/scope
+      const token = await getToken(messaging, { 
+        vapidKey: 'BLviM87bx44w96JmnuNzvDOrrpuK058wmtW7nCNn3SOfb4zLdSKzg5qX9ho-LJEcuFFpDIN5lTO9bh4O4Ex-q70',
+        serviceWorkerRegistration: swRegistration,
+        scope: `${BASE_PATH}firebase-cloud-messaging-push-scope`
+      });
+
       console.log('Scheduling reminder with token:', token);
-      const localDue = task.dueDate;  // Keep as local string
-      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;  // Get client's zone (e.g., "America/New_York")
+
+      const localDue = task.dueDate;
+      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       await addDoc(collection(db, 'reminders'), {
         token,
         text: `${task.title} (${task.priority})`,
-        dueDate: localDue,  // Store local string
-        timeZone: userTimeZone,  // Store zone for server adjustment
+        dueDate: localDue,
+        timeZone: userTimeZone,
         sent: false,
         createdAt: serverTimestamp()
       }).then(() => console.log('Reminder doc added to Firestore!'));
+    } catch (error) {
+      console.error('Reminder schedule error:', error);
     }
   };
 
