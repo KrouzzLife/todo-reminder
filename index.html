@@ -89,15 +89,17 @@
   <footer>
     <a href="https://krouzzlife.github.io/KDS/">KDS 2025 (KrouzzDigitalServices)</a>
   </footer>
-  <div id="notification-guide" class="hidden" style="position: fixed; top: 20%; left: 10%; right: 10%; background: white; padding: 20px; border: 1px solid #ccc; border-radius: 8px; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <h3>Enable Notifications for Reminders!</h3>
-  <p>Allow notifications to get due-date alerts—even when the app is closed.</p>
-  <ul>
-    <li><strong>Android Chrome:</strong> Works out of the box—grant permission when prompted.</li>
-    <li><strong>iPhone Safari (iOS 16.4+):</strong> Add to Home Screen first (Share > Add to Home Screen), then grant permission. Limited to installed PWAs; no bg notifs in regular tabs.</li>
-  </ul>
-  <button onclick="closeGuide()">Got It!</button>
-</div>
+  <div id="notification-guide" class="hidden">
+    <div class="guide-content">
+      <h3>Enable Notifications for Reminders!</h3>
+      <p>Allow notifications to get due-date alerts—even when the app is closed.</p>
+      <ul>
+        <li><strong>Android Chrome:</strong> Works out of the box—grant permission when prompted.</li>
+        <li><strong>iPhone Safari (iOS 16.4+):</strong> Add to Home Screen first (Share > Add to Home Screen), then grant permission. Limited to installed PWAs; no bg notifs in regular tabs.</li>
+      </ul>
+      <button onclick="requestAndEnable()">Enable Notifications</button>
+    </div>
+  </div>
   <script type="module" src="script.js"></script>
 </body>
 </html>

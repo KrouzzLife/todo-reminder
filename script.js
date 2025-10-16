@@ -78,6 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
     reset(); // This now properly closes the form
   };
 
+  // iOS-compatible permission request
+  const requestNotificationPermission = async () => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          console.log('Notifications enabled!');
+          // Optionally init FCM token here if needed
+        } else {
+          console.log('Permission denied.');
+        }
+        return permission;
+      } catch (err) {
+        console.error('Permission request failed:', err); // iOS might throw on non-PWA
+        return 'error';
+      }
+    }
+    return Notification.permission;
+  };
+
   const scheduleReminder = async (task) => {
     if (!messaging) return;
     try {
@@ -214,13 +234,24 @@ document.addEventListener('DOMContentLoaded', () => {
     currentTask = {};
   };
 
+  // Dynamic BASE_PATH helper
+  const getBasePath = () => {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    let baseSegment = pathSegments[0];
+    if (baseSegment === 'index.html') {
+      baseSegment = '';
+    }
+    return baseSegment ? `/${baseSegment}/` : '/';
+  };
+
   const getFCMToken = async () => {
     try {
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
+        const BASE_PATH = getBasePath();
         return getToken(messaging, { 
           vapidKey: 'BLviM87bx44w96JmnuNzvDOrrpuK058wmtW7nCNn3SOfb4zLdSKzg5qX9ho-LJEcuFFpDIN5lTO9bh4O4Ex-q70',
-          scope: '/todo-reminder/firebase-cloud-messaging-push-scope'  // Custom scope for GitHub repo path
+          scope: `${BASE_PATH}firebase-cloud-messaging-push-scope`  // Dynamic scope
         });
       }
     } catch (error) {
@@ -268,24 +299,29 @@ document.addEventListener('DOMContentLoaded', () => {
       guide.style.animation = 'fadeOut 0.3s ease';
       setTimeout(() => {
         guide.classList.add("hidden");
-        localStorage.setItem('guideSeen', 'true');
+        localStorage.setItem('notificationsGuideShown', 'true'); // Use consistent key
+        console.log('Guide closed and flag set'); // Debug
       }, 300);  // Delay for animation
     }
   };
 
-  // Show guide on permission request or first load (inside DOMContentLoaded for safe DOM)
-  const guide = document.getElementById("notification-guide");
-  if (guide) {
-    const isPermissionGranted = Notification.permission === 'granted';
-    if (!isPermissionGranted) {
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          guide.classList.remove("hidden");
-        }
-      });
-    } else if (!localStorage.getItem('guideSeen')) {
-      guide.classList.remove("hidden");
-      localStorage.setItem('guideSeen', 'true');  // Don't show again
+  // New: Global requestAndEnable for guide button
+  window.requestAndEnable = async () => {
+    const permission = await requestNotificationPermission();
+    if (permission === 'granted') {
+      console.log('Permission granted via guide!');
+    } else {
+      console.log('Permission not granted via guide');
     }
+    closeGuide(); // Close regardless
+  };
+
+  // Show guide on load if not seen (reliable on reload)
+  const guide = document.getElementById("notification-guide");
+  if (guide && !localStorage.getItem('notificationsGuideShown')) {
+    guide.classList.remove("hidden");
+    console.log('Guide shown on load'); // Debug
+    // Temp: Force show for testing (uncomment if needed)
+    // guide.classList.remove("hidden");
   }
 });

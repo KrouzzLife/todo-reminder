@@ -338,6 +338,7 @@
   
   #notification-guide .guide-content button:hover {
     background: var(--light-navy);
+    transform: translateY(-2px); /* Added: Matches app button hover */
   }
 
   .hidden {
