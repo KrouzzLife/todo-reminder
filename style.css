@@ -336,7 +336,7 @@
     animation: fadeIn 0.3s ease;
   }
   
-  #notification-guide > #enable-notif-btn {
+  #notification-guide #enable-notif-btn {
     background: var(--navy);
   }
 
