@@ -372,13 +372,6 @@
     margin-top: 5px;
   }
 
-  #notification-guide .guide-content button:hover,
-  #notification-guide .guide-content button:active {
-    background: var(--light-navy);
-    transform: translateY(-2px);
-    opacity: 0.95; /* Subtle touch feedback */
-  }
-
   .hidden {
     display: none !important;
   }
