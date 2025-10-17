@@ -350,7 +350,7 @@
     font-weight: bold;
   }
   
-  #notification-guide {
+  #notification-guide button {
     background: var(--navy);
     color: var(--light-blue);
     border: none;
@@ -370,7 +370,7 @@
     touch-action: manipulation;  /* Faster iOS response */
   }
 
-  .guide-content button {
+  .guide-close-btn {
     background: none;
     color: var(--light-blue);
     border: none;
