@@ -351,7 +351,7 @@
   }
   
   #notification-guide .guide-content button {
-    background: var(--navy);
+    background: transparent;
     color: var(--light-blue);
     border: none;
     padding: 0.75rem 1.5rem;
