@@ -264,21 +264,6 @@
   footer a:hover {
     color: var(--light-navy);
   }
-
-  /* Notification Guide Styles (overrides inline for consistency) */
-  #notification-guide {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 31, 63, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-  }
   
   #notification-guide .guide-content {
     background: var(--white);
@@ -300,23 +285,7 @@
     justify-content: flex-end;
   }
   
-  .guide-close-btn {
-    background: transparent;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-  }
   
-  .guide-close-btn:hover .close-icon {
-    fill: #a71e25; /* Darker red on hover */
-  }
-  
-  .guide-close-btn:focus-visible {
-    outline: none;  /* Remove navy focus ring to avoid box; consider custom indicator for accessibility if needed */
-  }
   
   #notification-guide .guide-content h3 {
     color: var(--navy);
@@ -350,18 +319,22 @@
     font-weight: bold;
   }
   
+
   #notification-guide > button {
     background: var(--navy);
     color: var(--light-blue);
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.7rem;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    width: 100%;
     margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1001; /* Ensures button is tappable over backdrop */
-    pointer-events: auto;  /* Ensures taps register */
   }
 
   .guide-close-btn {
@@ -371,6 +344,7 @@
     width: 100%;
     margin-top: 5px;
   }
+
 
   .hidden {
     display: none !important;
