@@ -350,7 +350,7 @@
     font-weight: bold;
   }
   
-  #notification-guide button {
+  #notification-guide > button {
     background: var(--navy);
     color: var(--light-blue);
     border: none;
