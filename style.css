@@ -301,8 +301,9 @@
   }
   
   .guide-close-btn {
-    background: none;
-    border: none;
+    background: transparent;
+    border: 0;
+    outline: none;
     cursor: pointer;
     padding: 0;
     width: 24px;
@@ -311,6 +312,10 @@
   
   .guide-close-btn:hover .close-icon {
     fill: #a71e25; /* Darker red on hover */
+  }
+  
+  .guide-close-btn:focus-visible {
+    outline: 2px solid var(--navy);  /* Subtle focus ring for accessibility */
   }
   
   #notification-guide .guide-content h3 {
