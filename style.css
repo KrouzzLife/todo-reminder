@@ -336,7 +336,9 @@
     animation: fadeIn 0.3s ease;
   }
   
-  
+  #notification-guide > button {
+    background: var(--navy);
+  }
 
   .guide-close-btn {
     background: none;
