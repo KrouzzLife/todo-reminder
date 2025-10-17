@@ -325,10 +325,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     background: var(--navy);
-    color: var(--light-blue);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -338,6 +335,14 @@
   
   #notification-guide #enable-notif-btn {
     background: var(--navy);
+    color: var(--light-blue);
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8rem;
+    border: 2px solid var(--navy);
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
   }
 
   .guide-close-btn {
