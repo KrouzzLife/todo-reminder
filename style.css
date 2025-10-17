@@ -303,6 +303,7 @@
     font-size: 0.9rem;
     list-style: none;
     padding-left: 0;
+    color: var(--navy);
   }
   
   #notification-guide .guide-content li {
@@ -334,6 +335,7 @@
     z-index: 1000;
     animation: fadeIn 0.3s ease;
   }
+  
   
 
   .guide-close-btn {
